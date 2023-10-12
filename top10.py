@@ -6,7 +6,7 @@ from lxml import html
 now = datetime.now()
 base = "https://flixpatrol.com"
 expiration_days = 180
-use_sleep = False
+use_sleep = True
 last_request = None
 header = {
     "Accept-Language": "en-US,en;q=0.5",
