@@ -25,7 +25,7 @@ script_name = "TOP10"
 base_dir = os.path.dirname(os.path.abspath(__file__))
 pmmargs = PMMArgs("meisnate12/PMM-TOP10", base_dir, options, use_nightly=False)
 logger = logging.PMMLogger(script_name, "stinger", os.path.join(base_dir, "logs"), is_trace=pmmargs["trace"], log_requests=pmmargs["log-requests"])
-logger.screen_width = 175
+logger.screen_width = 160
 logger.header(pmmargs, sub=True)
 logger.separator("Parsing TOP10", space=False, border=False)
 logger.start()
