@@ -49,9 +49,9 @@ for p in [
 def _request(url, return_time=False):
     sleep_time = 0 if pmmargs["no-sleep"] else random.randint(2, 6)
     logger.info(f"URL: {base}{url}{f' [Sleep: {sleep_time}]' if sleep_time else ''}")
+    url_response = html.fromstring(requests.get(f"{base}{url}", headers=header).content)
     if sleep_time and return_time is False:
         time.sleep(sleep_time)
-    url_response = html.fromstring(requests.get(f"{base}{url}", headers=header).content)
     if return_time:
         return url_response, sleep_time
     else:
@@ -94,6 +94,7 @@ def save_links(country, movie_links, show_links):
 
 
 try:
+    logger.info("\nWorld")
     response = _request(f"/top10/streaming/world/{now.strftime('%Y-%m-%d')}/")
     for p in data:
         save_links("world",
