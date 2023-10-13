@@ -261,7 +261,7 @@
 /title/the-good-nurse/: {tmdb_id: 541134, media_type: movie, saved_date: '2022-10-06'}
 /title/all-quiet-on-the-western-front-2022/: {tmdb_id: 49046, media_type: movie, saved_date: '2023-01-30'}
 /title/the-takeover/: {tmdb_id: 944864, media_type: movie, saved_date: '2022-10-21'}
-/title/hotel-transylvania-2/: {tmdb_id: 159824, media_type: movie, saved_date: '2022-10-24'}
+/title/hotel-transylvania-2/: {tmdb_id: 159824, media_type: movie, saved_date: '2023-10-13'}
 /title/oblivion/: {tmdb_id: 75612, media_type: movie, saved_date: '2022-10-15'}
 /title/man-on-a-ledge/: {tmdb_id: 49527, media_type: movie, saved_date: '2022-10-06'}
 /title/wild-is-the-wind/: {tmdb_id: 1033107, media_type: movie, saved_date: '2022-10-31'}
@@ -3061,3 +3061,16 @@
 /title/easy-a/: {tmdb_id: 37735, media_type: movie, saved_date: '2023-08-19'}
 /title/the-oily-maniac/: {tmdb_id: 88922, media_type: movie, saved_date: '2023-04-24'}
 /title/the-prince-me/: {tmdb_id: 11137, media_type: movie, saved_date: '2023-04-19'}
+/title/the-fall-of-the-house-of-usher/: {tmdb_id: 157065, media_type: show, saved_date: '2023-05-22'}
+/title/kasargold/: {tmdb_id: 1028730, media_type: movie, saved_date: '2023-05-15'}
+/title/hello-ghost/: {tmdb_id: 811704, media_type: movie, saved_date: '2023-06-26'}
+/title/maxine/: {tmdb_id: 211909, media_type: show, saved_date: '2023-05-02'}
+/title/guddo-naito-warudo/: {tmdb_id: 231677, media_type: show, saved_date: '2023-05-11'}
+/title/the-road-to-murder/: {tmdb_id: 110804, media_type: show, saved_date: '2023-05-12'}
+/title/black-lotus/: {tmdb_id: 996154, media_type: movie, saved_date: '2023-09-14'}
+/title/greenhouse/: {tmdb_id: 915655, media_type: movie, saved_date: '2023-05-14'}
+/title/mission-possible/: {tmdb_id: 629028, media_type: movie, saved_date: '2023-07-18'}
+/title/a-good-day-to-be-a-dog/: {tmdb_id: 209502, media_type: show, saved_date: '2023-09-06'}
+/title/i-am-solo/: {tmdb_id: 129236, media_type: show, saved_date: '2023-05-22'}
+/title/peppermint/: {tmdb_id: 458594, media_type: movie, saved_date: '2023-08-07'}
+/title/deliver-us-from-evil-2014/: {tmdb_id: 184346, media_type: movie, saved_date: '2023-08-11'}
