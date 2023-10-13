@@ -48,10 +48,11 @@ for p in [
 
 def _request(url):
     if pmmargs["no-sleep"] is False:
-        last_request = random.randint(2, 10)
-        logger.info(f"Sleep: {last_request}")
-        time.sleep(last_request)
-    logger.info(f"URL: {base}{url}")
+        sleep_time = random.randint(2, 10)
+        logger.info(f"URL: {base}{url} [Sleep: {sleep_time}]")
+        time.sleep(sleep_time)
+    else:
+        logger.info(f"URL: {base}{url}")
     return html.fromstring(requests.get(f"{base}{url}", headers=header).content)
 
 
@@ -93,10 +94,10 @@ try:
                    response.xpath(f"//div[@id='{p.replace('_', '-')}-2']//td/a/@href"))
 
     country_links = response.xpath(f"//div[child::button[contains(text(), 'Worldwide')]]//a/@href")
-
-    for country_link in country_links:
+    num_countries = len(country_links)
+    for i, country_link in enumerate(country_links, 1):
         country_name = country_link.split("/")[3].replace("-", "_")
-        logger.info(f"Country: {country_name}")
+        logger.info(f"Country {i}/{num_countries}: {country_name}")
         response = _request(country_link)
         for p in data:
             platform_link = f"//div[descendant::h2/span[contains(@class, 'platform-{p.replace('_', '-')}')]]/div/"
