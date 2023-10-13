@@ -46,14 +46,16 @@ for p in [
     data[p] = {}
 
 
-def _request(url):
-    if pmmargs["no-sleep"] is False:
-        sleep_time = random.randint(2, 10)
-        logger.info(f"URL: {base}{url} [Sleep: {sleep_time}]")
+def _request(url, return_time=False):
+    sleep_time = 0 if pmmargs["no-sleep"] else random.randint(2, 6)
+    logger.info(f"URL: {base}{url}{f' [Sleep: {sleep_time}]' if sleep_time else ''}")
+    if sleep_time and return_time is False:
         time.sleep(sleep_time)
+    url_response = html.fromstring(requests.get(f"{base}{url}", headers=header).content)
+    if return_time:
+        return url_response, sleep_time
     else:
-        logger.info(f"URL: {base}{url}")
-    return html.fromstring(requests.get(f"{base}{url}", headers=header).content)
+        return url_response
 
 
 def get_tmdb_id(flixpatrol_url, is_movie=True):
@@ -65,15 +67,20 @@ def get_tmdb_id(flixpatrol_url, is_movie=True):
         if expired is False:
             return ids[flixpatrol_url]["tmdb_id"]
     media_type = "movie" if is_movie else "show"
-    id_list = _request(flixpatrol_url).xpath("//script[@type='application/ld+json']/text()")
+    url_response, sleep_time = _request(flixpatrol_url, return_time=True)
+    id_list = url_response.xpath("//script[@type='application/ld+json']/text()")
     if len(id_list) > 0 and id_list[0] and "https://www.themoviedb.org" in id_list[0]:
         match = re.search(r"(\d+)", str(id_list[0].split("https://www.themoviedb.org")[1]))
         if match:
             tmdb_id = int(match.group(1))
             saved_date = now if expired is True else (now - timedelta(days=random.randint(1, expiration_days)))
             ids[flixpatrol_url] = YAML.inline({"tmdb_id": tmdb_id, "media_type": media_type, "saved_date": saved_date.strftime("%Y-%m-%d")})
+            if sleep_time:
+                time.sleep(sleep_time)
             return ids[flixpatrol_url]["tmdb_id"]
     logger.error(f"ERROR: TMDb {media_type.capitalize()} ID not found at {flixpatrol_url}: {id_list}")
+    if sleep_time:
+        time.sleep(sleep_time)
     return None
 
 
@@ -97,7 +104,7 @@ try:
     num_countries = len(country_links)
     for i, country_link in enumerate(country_links, 1):
         country_name = country_link.split("/")[3].replace("-", "_")
-        logger.info(f"Country {i}/{num_countries}: {country_name}")
+        logger.info(f"\nCountry {i}/{num_countries}: {country_name}")
         response = _request(country_link)
         for p in data:
             platform_link = f"//div[descendant::h2/span[contains(@class, 'platform-{p.replace('_', '-')}')]]/div/"
