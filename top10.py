@@ -121,7 +121,7 @@ try:
 
     info_yaml = YAML(path=os.path.join(base_dir, "info.yml"), start_empty=True)
     info_yaml["platforms"] = platforms
-    info_yaml["countries"] = [c for c in data]
+    info_yaml["locations"] = [c for c in data]
     info_yaml.save()
 
     for country in data:
