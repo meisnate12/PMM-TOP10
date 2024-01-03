@@ -1,5 +1,5 @@
 import os, random, re, sys, time
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, UTC
 
 if sys.version_info[0] != 3 or sys.version_info[1] < 11:
     print("Version Error: Version: %s.%s.%s incompatible please use Python 3.11+" % (sys.version_info[0], sys.version_info[1], sys.version_info[2]))
@@ -7,10 +7,10 @@ if sys.version_info[0] != 3 or sys.version_info[1] < 11:
 
 try:
     import requests
+    from git import Repo
     from lxml import html
-    from pmmutils import logging, util
+    from pmmutils import logging
     from pmmutils.args import PMMArgs
-    from pmmutils.exceptions import Failed
     from pmmutils.yaml import YAML
 except (ModuleNotFoundError, ImportError):
     print("Requirements Error: Requirements are not installed")
@@ -143,13 +143,15 @@ try:
         country_yaml.data = {k: country_yaml[k] for i, k in enumerate(keys) if i < 30}
         country_yaml.save()
 
-    with open("README.md", "r") as f:
-        readme_data = f.readlines()
+    if [item.a_path for item in Repo(path=".").index.diff(None) if item.a_path.endswith(".yml")]:
 
-    readme_data[1] = f"Last generated at: {datetime.utcnow().strftime('%B %d, %Y %H:%M')} UTC\n"
+        with open("README.md", "r") as f:
+            readme_data = f.readlines()
 
-    with open("README.md", "w") as f:
-        f.writelines(readme_data)
+        readme_data[1] = f"Last generated at: {datetime.now(UTC).strftime('%B %d, %Y %H:%M')} UTC\n"
+
+        with open("README.md", "w") as f:
+            f.writelines(readme_data)
 
     logger.separator(f"{script_name} Finished\nTotal Runtime: {logger.runtime()}")
 except KeyboardInterrupt:
